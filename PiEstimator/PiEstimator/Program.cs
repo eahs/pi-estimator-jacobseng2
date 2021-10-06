@@ -7,7 +7,7 @@ namespace PiEstimator
         static void Main(string[] args)
         {
             long n;
-            
+
             Console.WriteLine("Pi Estimator");
             Console.WriteLine("================================================");
 
@@ -27,23 +27,43 @@ namespace PiEstimator
 
             // TODO: Calculate Pi
 
+            double hits = 0.0;
+            double total = 0.0;
+
+            for (int i = 0; i < n; i++)
+            {
+                if (Math.Pow(rand.NextDouble(), 2) + Math.Pow(rand.NextDouble(), 2) <= 1)
+                {
+                    hits++;
+                    total++;
+                }
+                else
+                {
+                    total++;
+                }
+
+
+                pi = 4 * (hits / total);
+
+            }
+
             return pi;
         }
 
         static long GetNumber(string prompt)
-        {
-            long output;
-
-            while (true)
             {
-                Console.Write(prompt);
-                string input = Console.ReadLine();
+                long output;
 
-                if (Int64.TryParse(input, out output))
+                while (true)
                 {
-                    return output;
+                    Console.Write(prompt);
+                    string input = Console.ReadLine();
+
+                    if (Int64.TryParse(input, out output))
+                    {
+                        return output;
+                    }
                 }
             }
         }
     }
-}
